@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+</head>
+<body>
+<div>
+  <form method="POST" action="/" id="form" onsubmit="hello(event);return false">     
+      <label>Website URL: </label><input id="name" name="name" type="text" value="{{.Name}}" />
+      <button>Click</button>
+  </form>
+    <div id="crawlResults">
+        <h4>{{.Name}}</h4> <br />
+        {{range $val := .Site}}
+        <span >{{$val}}</span><br />
+        {{end}}
+    </div>
+  <p id="error"></p>
+</div>
+</body>
+<script>
+    var form = document.getElementById("form")
+    var crawlResults = document.getElementById("crawlResults")
+    var error = document.getElementById("error")
+    hello=(e)=>{
+        e.preventDefault()
+        if(form.name.value && (form.name.value.indexOf("https://")>-1 || form.name.value.indexOf("http://")>-1))
+        {
+            error.innerHTML = ""
+            crawlResults.style.display = "block"
+            form.submit()
+        }
+        else{
+            crawlResults.style.display = "none"
+            error.innerHTML = "Check URL - Must contain 'http://' or 'https://' or 'www.'"
+            console.log("wrong")
+        }
+    }
+</script>
+</html>
