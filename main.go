@@ -6,7 +6,6 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"os"
 
 	"golang.org/x/net/html"
 )
@@ -91,12 +90,7 @@ func getLinks(body io.Reader) []string {
 func main() {
 	http.HandleFunc("/", hello)
 	fmt.Printf("Starting server for testing HTTP POST...\n")
-	port, err := os.LookupEnv("PORT")
-	if !err {
-		port = "3000"
-	}
-	fmt.Println(port)
-	if err := http.ListenAndServe(":"+port, nil); err != nil {
+	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal(err)
 	}
 	dat.Name = ""
