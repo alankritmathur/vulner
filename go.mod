@@ -1,4 +1,4 @@
-module main.go
+module github.com/alankritmathur/vulner
 
 go 1.15
 
